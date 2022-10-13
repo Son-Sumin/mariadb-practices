@@ -1,0 +1,37 @@
+C:\WINDOWS\system32>mysql -u root -p
+
+MariaDB [(none)]> show databases;
+
+MariaDB [(none)]> use mysql;
+
+MariaDB [mysql]> show tables;
+
+MariaDB [mysql]> select * from user;
+
+---------------------------------------------------
+workbench(입력 후 crtl+enter)
+
+show tables;
+select * from user;
+
+(DCL 하는 중)
+(주석은 --)
+-- 데이터베이스 생성
+create database webdb;
+
+-- 데이터베이스 생성 확인
+show databases;
+
+-- 사용자 삭제
+drop user 'webdb'@'locahost';
+
+-- db 사용자 생성
+create user 'webdb'@'localhost' identified by 'webdb';
+
+-- 권한 부여
+-- * 에 테이블이 나와야하는데 너무 많기에 *로 표현
+-- @ 뒤에는 다른 사람 주소를 주면 타인과 공유 가능
+grant all privileges on webdb.* to 'webdb'@'localhost';
+
+-- flush privileges(권한 정보 재로딩)
+flush privileges;

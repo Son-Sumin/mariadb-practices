@@ -1,0 +1,34 @@
+ -- load data local file
+ load data local infile 'c:\\pet.txt' into table pet;
+시작 화면 webdb 파일 우클릭 edit 두번째 advance에 입력할 것
+OPT_LOCAL_INFILE=1
+
+------------------------------
+(DCL 하는 중)
+mariabd-mysql
+root
+에 들어가서 아래 입력
+
+-- 데이터베이스 생성
+create database employees;
+
+create user 'hr'@'localhost' identified by 'hr';
+
+grant all privileges on employees.* to 'hr'@'localhost';
+
+flush privileges;
+------------------------------
+
+시작화면 + 누르고
+connection name 알아볼 수 있게 설정
+username 내가 만들 이름
+default 내가 만든 이름
+
+--------------------------------
+[오후]
+PS C:\employees_db> ls (확인 후)
+PS C:\employees_db> mysql -u hr -D employees -p -e "source .\employees.sql"
+
+논리 데이터베이스 설계(ERD) <-> 물리 데이터베이스(tables)
+
+select c1,c2.. from tbl where condition order by asc/desc
