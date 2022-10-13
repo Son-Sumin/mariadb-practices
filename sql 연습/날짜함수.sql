@@ -20,15 +20,10 @@ select date_format(now(), '%Y-');
 select date_format(now(), '%Y년 %m월 %d일 %h:%i:%s');
 select date_format(now(), '%d %b,\'%y %h:%i:%s');
 
--- period_diff
+-- period_diff(endmon, startmon); 기간 사이의 개월 수를 반환(일자X)
 -- 포맷팅 YYMM, YYYYMM
--- 예제: 근무 개월 수
-select first_name,  
-  period_diff(date_format(curdate(),'%y%m'), date_format(hire_date, '%y%m')) as month
-  from employees
-  order by period_diff(date_format(curdate(),'%y%m'),
-           date_format(hire_date, '%y%m'));
-           
+
+-- 예제: 근무 개월 수           
 select first_name, 
   period_diff(date_format(curdate(),'%y%m'), date_format(hire_date, '%y%m')) as month
   from employees

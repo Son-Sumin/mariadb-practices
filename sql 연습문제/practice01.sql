@@ -76,7 +76,7 @@ select distinct(title) from titles
 -- 문제10**
 -- 현재 Enginner 직책의 사원은 총 몇 명입니까?
 select count(emp_no) from titles
-  where title = 'Enginner' and to_date like '9999%';
+  where title = 'Engineer' and to_date like '9999%';
   
  select count(*)
     from titles
@@ -87,7 +87,7 @@ select count(emp_no) from titles
 -- 사번이 13250(Zeydy)인 지원이 직책 변경 상황을 시간순으로 출력해보세요.
 select from_date, to_date from titles
   where emp_no = '13250'
-  order by from_date desc;
+  order by from_date asc;
   
     select title, from_date, to_date
 	from titles

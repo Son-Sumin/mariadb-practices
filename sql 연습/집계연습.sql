@@ -33,6 +33,7 @@ select emp_no, avg(salary) as avg_salary
   
 -- 입력순서: from, where, group by, having, orderby
 
+
 -- 예제
 -- salaries 테이블에서 사번이 10060인 직원의 사번, 급여평균, 급여총합을 출력하세요.
 
