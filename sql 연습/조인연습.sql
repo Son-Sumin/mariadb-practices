@@ -51,22 +51,33 @@ select b.title, avg(salary)
 
 -- 실습문제1: 
 -- 현재 회사생활을 반영한 직원별 근무부서를 사번, 직원 전체이름, 근무부서 순으로 출력하세요.
-   select a.emp_no, concat(a.first_name, a.last_name), c.dept_name 
-     from employees a join dept_manager b join departments c
-	   on a.emp_no = b.emp_no and b.dept_no = c.dept_no
-    where b.to_date = '9999-01-01'
- group by b.emp_no;
-
 select a.emp_no, a.first_name, b.dept_name
   from employees a, departments b, dept_emp c
  where a.emp_no = c.emp_no
    and b.dept_no = c.dept_no
-   and c.to_date = '9999-01-01';
+   and c.to_date = '9999-01-01'
+   order by a.emp_no desc;
+
+-- my sol
+   select a.emp_no, concat(a.first_name, a.last_name), b.dept_name 
+     from employees a 
+     join departments b
+	 join dept_emp c 
+	   on a.emp_no = c.emp_no 
+	  and b.dept_no = c.dept_no
+    where c.to_date = '9999-01-01'
+ order by a.emp_no desc;
 
 -- 실습문제2: 
 -- 현재 회사에서 지급되고 있는 급여체계를 반영한 결과를 출력하세요.
 -- 사번, 전체이름, 연봉 형태로 출력하세요.
 select a.emp_no, a.first_name, b.salary
+  from employees a, salaries b
+ where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01';
+
+-- my sol   
+select a.emp_no, concat(a.first_name, a.last_name), b.salary
   from employees a, salaries b
  where a.emp_no = b.emp_no
    and b.to_date = '9999-01-01';
@@ -77,8 +88,18 @@ select a.emp_no, a.first_name, b.salary
 select a.title, avg(b.salary), count(*)
   from titles a, salaries b
  where a.emp_no = b.emp_no
+  and a.to_date = '9999-01-01'
  group by a.title
  having count(*) >= 100;
+ 
+-- my sol 
+ select a.title, avg(b.salary), count(*) 
+ from titles a, salaries b
+ where a.emp_no = b.emp_no
+   and a.to_date = '9999-01-01'
+group by a.title
+having count(*) >= 100;
+  
 
 -- 실습문제4: 
 -- 현재 부서별로 직책이 Engineer인 직원들에 대해서만 평균급여를 구하세요.
@@ -93,4 +114,17 @@ select a.title, avg(b.salary), count(*)
 	 and d.to_date = '9999-01-01'
 	 and d.title = 'Engineer'
 group by a.dept_no
+order by avg(salary) desc;
+
+-- my sol
+select a.dept_name, avg(salary)
+  from departments a, dept_emp b, salaries c, titles d
+ where a.dept_no = b.dept_no
+   and b.emp_no = c.emp_no
+   and c.emp_no = d.emp_no
+   and b.to_date = '9999-01-01'
+   and c.to_date = '9999-01-01'
+   and d.to_date = '9999-01-01'
+   and d.title = 'engineer'
+group by a.dept_name
 order by avg(salary) desc;
