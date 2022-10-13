@@ -25,13 +25,15 @@ select emp_no, avg(salary)
 -- having
 -- 집계결과(결과 임시 테이블)에서 row를 선택해야 하는 경우
 -- 이미 where절은 실행이 되었기 때문에 having절에서 이 조건을 주어야 한다.
+-- 집계함수의 조건을 부여하고 싶을 때는 having절에 넣어야 하며, where절에는 사용불가하다.
 select emp_no, avg(salary) as avg_salary
   from salaries
   group by emp_no
   having avg_salary > 60000
   order by avg_salary desc;
   
--- 입력순서: from, where, group by, having, orderby
+-- 입력순서: select, from, where, group by, having, orderby
+-- 처리순서: where, group by, having, select, order by
 
 
 -- 예제
