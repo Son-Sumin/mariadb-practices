@@ -47,3 +47,6 @@ select emp_no, avg(salary), sum(salary)
   from salaries
   group by emp_no
   having emp_no = '10060';
+  
+-- select절에 통계함수가 들어가면 select절에 컬럼이 들어갈 수 없다.
+-- 단, 'group by oo'가 있으면 통계함수가 들어간 select절 일반 컬럼 oo가 들어갈 수 있다.
