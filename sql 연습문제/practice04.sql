@@ -5,9 +5,25 @@
 select avg(salary) as avg_salary
   from salaries
  where to_date = '9999-01-01';
+ 
+ -- 72012.2359
+ select count(*) as emp_avgsal
+   from salaries
+  where salary > (select avg(salary) as avg_salary
+					from salaries
+                   where to_date = '9999-01-01');
 
 -- 문제2. 
--- 현재, 각 부서별로 최고의 급여를 받는 사원의 사번, 이름, 부서 연봉을 조회하세요. 단 조회결과는 연봉의 내림차순으로 정렬되어 나타나야 합니다. 
+-- 현재, 각 부서별로 최고의 급여를 받는 사원의 사번, 이름, 부서 연봉을 조회하세요.
+-- 단 조회결과는 연봉의 내림차순으로 정렬되어 나타나야 합니다. 
+select b.title, max(a.salary) as max_salary
+  from salaries a, titles b
+ where a.emp_no = b.emp_no
+   and a.to_date = '9999-01-01'
+   and b.to_date = '9999-01-01'
+ group by b.title;
+ 
+ select *
 
 -- 문제3.
 -- 현재, 자신의 부서 평균 급여보다 연봉(salary)이 많은 사원의 사번, 이름과 연봉을 조회하세요 
