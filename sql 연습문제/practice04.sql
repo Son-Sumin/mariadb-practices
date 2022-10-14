@@ -82,6 +82,8 @@ select c.emp_no, c.first_name, a.salary, b.dept_no
                and b.to_date = '9999-01-01'
           group by b.dept_no);
    
+   
+   
 -- 문제4.
 -- 현재, 사원들의 사번, 이름, 매니저 이름, 부서 이름으로 출력해 보세요.
 
@@ -90,6 +92,7 @@ select c.emp_no, c.first_name, a.salary, b.dept_no
 
 -- 문제6.
 -- 평균 연봉이 가장 높은 부서는? 
+-- 부서별 평균 연봉
 select b.dept_no, avg(a.salary)
   from salaries a, dept_emp b
  where a.emp_no = b.emp_no
@@ -98,20 +101,44 @@ select b.dept_no, avg(a.salary)
 group by b.dept_no;
 
 -- sol)
-select b.dept_no, a.salary
-  from salaries a, dept_emp b
+  select b.dept_no, avg(a.salary) as max_salary
+    from salaries a, dept_emp b
+   where a.emp_no = b.emp_no
+     and a.to_date = '9999-01-01'
+     and b.to_date = '9999-01-01'
+group by b.dept_no
+  having max_salary = (select max(c.avg_salary)
+						 from (select b.dept_no, avg(a.salary) as avg_salary
+                                 from salaries a, dept_emp b
+                                where a.emp_no = b.emp_no
+								  and a.to_date = '9999-01-01'
+		                          and b.to_date = '9999-01-01'
+							 group by b.dept_no) c);
+                             
+-- 문제7.
+-- 평균 연봉이 가장 높은 직책?
+select b.title, avg(a.salary) as avg_salary
+  from salaries a, titles b
  where a.emp_no = b.emp_no
    and a.to_date = '9999-01-01'
    and b.to_date = '9999-01-01'
-   and a.salary = (select avg(a.salary) as avg_salary
-                        from salaries a, dept_emp b
-                       where a.emp_no = b.emp_no
-                         and a.to_date = '9999-01-01'
-		                 and b.to_date = '9999-01-01'
-	                group by b.dept_no);
+group by b.title;
 
--- 문제7.
--- 평균 연봉이 가장 높은 직책?
+select b.title, avg(a.salary) as max_salary
+  from salaries a, titles b
+ where a.emp_no = b.emp_no
+   and a.to_date = '9999-01-01'
+   and b.to_date = '9999-01-01'
+group by b.title
+ having max_salary = (select max(c.avg_salary)
+                        from (select b.title, avg(a.salary) as avg_salary
+                                from salaries a, titles b
+                               where a.emp_no = b.emp_no
+                                 and a.to_date = '9999-01-01'
+                                 and b.to_date = '9999-01-01'
+                            group by b.title) c);
+   
+
 
 -- 문제8.
 -- 현재 자신의 매니저보다 높은 연봉을 받고 있는 직원은?
