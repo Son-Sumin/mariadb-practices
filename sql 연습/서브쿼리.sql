@@ -91,6 +91,7 @@ group by a.title
 order by avg_salary asc
    limit 0, 1;
 
+
 -- 3-2) 복수행 연산자: in(=any), not in, any, all (답이 여러 행 나오는 경우)
 -- any 사용법; 조건을 만족하는 값이 하나라도 있다면 결과 리턴
 -- 1. =any: in과 동일
