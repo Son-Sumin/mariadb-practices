@@ -12,7 +12,7 @@ select a.first_name, b.title   -- employees.first_name 너무 기니까
    and b.to_date = '9999-01-01';   -- row 선택 조건
    
 -- 예제2: 현재 근무하고 있는 직원의 이름과 직책을 출력하되 여성 engineer만 출력하세요.
-select a.first_name,a.gender, b.title   -- employees.first_name 너무 기니까
+select a.first_name,a.gender, b.title
   from employees a, titles b
  where a.emp_no = b.emp_no -- join 조건 (2-1)개
    and b.to_date = '9999-01-01'   -- row 선택 조건1
