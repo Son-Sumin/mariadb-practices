@@ -33,6 +33,9 @@ select a.emp_no, a.first_name, e.salary, d.title, c.dept_name
    and b.dept_no = c.dept_no
    and a.emp_no = d.emp_no
    and a.emp_no = e.emp_no
+   and b.to_date = '9999-01-01'
+   and d.to_date = '9999-01-01'
+   and e.to_date - '9999-01-01'
 order by a.first_name;
 
 -- 문제5.
@@ -44,10 +47,11 @@ select a.emp_no, concat(a.first_name, ' ',a.last_name), b.title, b.to_date
  where a.emp_no = b.emp_no
    and b.title = 'Technique Leader'
    and b.to_date != '9999-01-01';
+    --  and b.to_date <> '9999-01-01';
 
 -- 문제6.
 -- 직원 이름(last_name) 중에서 S(대문자)로 시작하는 직원들의 이름, 부서명, 직책을 조회하세요.
-select a.first_name, a.last_name, c.dept_name,d.title
+select concat(a.first_name, a.last_name), c.dept_name,d.title
   from employees a, dept_emp b, departments c, titles d
 where a.emp_no = b.emp_no
   and b.dept_no = c.dept_no
@@ -56,7 +60,7 @@ where a.emp_no = b.emp_no
 
 -- 문제7.
 -- 현재, 직책이 Engineer인 사원 중에서 현재 급여가 40000 이상인 사원을 급여가 큰 순서대로 출력하세요.
-select a.emp_no, b.salary
+select a.emp_no, b.salary, a.title
   from titles a, salaries b
  where a.emp_no = b. emp_no
    and a.to_date = '9999-01-01'
@@ -67,7 +71,7 @@ order by b.salary desc;
 
 -- 문제8.
 -- 현재 급여가 50000이 넘는 직책을 직책, 급여로 급여가 큰 순서대로 출력하시오
-select a.title, b.salary
+select a.emp_no, a.title, b.salary
   from titles a, salaries b
  where a.emp_no = b.emp_no
    and a.to_date = '9999-01-01'
