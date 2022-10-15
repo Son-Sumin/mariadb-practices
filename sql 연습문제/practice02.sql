@@ -20,6 +20,10 @@ select emp_no, min(hire_date)
   from employees
   group by emp_no
   having min(hire_date) = '1985-01-01';
+ 
+ sol)
+  select date_format(min(hire_date), '%Y년 %m월 %d일')
+  from employees;
   
 
 -- 문제4. 00
@@ -38,4 +42,9 @@ select max(salary) as '최고연봉', min(salary) as '최저연봉'
 -- 최고 어린 사원의 나이와 최 연장자의 나이는?
 select 2023-year(max(birth_date)) as '최고 어린 사원 나이',
 	   2023-year(min(birth_date)) as '최 연장자 나이'
+  from employees;
+ 
+ sol) 
+ select date_format(curdate(),'%Y') - date_format(max(birth_date),'%Y'),
+       date_format(curdate(),'%Y') - date_format(min(birth_date),'%Y')
   from employees;
