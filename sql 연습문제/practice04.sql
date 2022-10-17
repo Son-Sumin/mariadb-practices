@@ -146,7 +146,7 @@ select a.emp_no, a.first_name, b.dept_no, c.title, d.salary
  where a.emp_no = b.emp_no
    and b.emp_no = c.emp_no
    and c.emp_no = d.emp_no
-   and d.salary = (select max(a.avg_salary)
+   and d.salary < (select max(a.avg_salary)
 							      from (select b.dept_no, avg(a.salary) as avg_salary
 										  from salaries a, dept_emp b
 										 where a.emp_no = b.emp_no
@@ -154,7 +154,6 @@ select a.emp_no, a.first_name, b.dept_no, c.title, d.salary
                                            and b.to_date = '9999-01-01'
 							          group by b.dept_no) a)
 order by d.salary desc;
-
 
 -- 문제6.
 -- 평균 연봉이 가장 높은 부서는? 

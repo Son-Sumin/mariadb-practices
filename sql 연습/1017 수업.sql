@@ -15,6 +15,8 @@
 -- 비식별; A의 테이블 PK가 B의 테이블 FK가 될 때
 -- 식별; A의 테이블 PK가 B의 테이블 PK도 될 때
 
+-- jetbrain(java nod), pycharm, intellij(java) ; 프로그램 지원 회사
+
 -- create database cdmall;
 -- create user 'cdmall'@'localhost' identified by 'cdmall';
 -- grant all privileges on cdmall.* to 'cdmall'@'localhost';
