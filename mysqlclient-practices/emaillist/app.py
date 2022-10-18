@@ -3,19 +3,45 @@
 # print(message)
 
 # 제어문; 조건문(if), 반복문(for)
+import model
 
-while True:
-    cmd = input('(l)ist, (a)dd, (d)elete, (q)uit > ')
+def run_list():
+    results = model.findall()
+    for index, result in enumerate(results):
+        print(f'{index + 1}: {result["first_name"]} {result["last_name"]}:{result["email"]}')
 
-    if cmd == 'q':
-        break
-    elif cmd == 'l':
-        print('list 처리')
-    elif cmd == 'a':
-        print('add 처리')
-    elif cmd == 'd':
-        print('delete 처리')
-    else:
-        print('알 수 없는 명령입니다.')
+def run_add():
+    firstname = input('first name: ')
+    lastname = input('last name: ')
+    email = input('email: ')
+    # if firstname == '':
+    #     print(f'입력 필수 항목입니다')
 
-print(cmd)
+    model.insert(firstname, lastname, email)
+
+    print('--------------------')
+    run_list()
+
+def main():
+    while True:
+        cmd = input('(l)ist, (a)dd, (d)elete, (q)uit > ')
+
+        if cmd == 'q':
+            break
+        elif cmd == 'l':
+            run_list()
+        elif cmd == 'a':
+            run_add()
+        elif cmd == 'd':
+            model.deletebyemail()
+        else:
+            print('알 수 없는 명령입니다.')
+
+if __name__ == '__main__':
+    main()
+
+
+
+# app.py ; controller, view
+# model.py ; model
+# model이 emaillist라는 DB에서 CRUD하도록 app이 control하여 결과를 보여줌
