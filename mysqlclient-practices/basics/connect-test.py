@@ -9,12 +9,8 @@ try:
                  port=3306,
                  db='webdb',
                  charset='utf8')
-    print('success')
+    print('연결 성공')
 
-except OperationalError as e:
-    print('error!!!!!!!!!!!!!')
-
-print('end!!!!!')
-
-# cursor 생성
-# cursor = db.cursor()
+#에러 처리
+except OperationalError as e:     # OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능
+    print(f'에러: {e}')
