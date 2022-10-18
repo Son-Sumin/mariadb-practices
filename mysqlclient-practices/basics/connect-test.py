@@ -12,5 +12,8 @@ try:
     print('연결 성공')
 
 #에러 처리
-except OperationalError as e:     # OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능
+except OperationalError as e:
     print(f'에러: {e}')
+
+
+# OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능

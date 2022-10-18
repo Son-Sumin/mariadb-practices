@@ -16,7 +16,7 @@ try:
 
     # 3. sql(delete문) 실행
     sql = 'select name, owner, species, gender, date_format(birth, "%Y-%m-%d") as birth, death from pet'
-    count = cursor.execute(sql)
+    cursor.execute(sql)
 
     # 4. 결과 받아오기
     results = cursor.fetchall()

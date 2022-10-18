@@ -22,6 +22,13 @@ def run_add():
     print('--------------------')
     run_list()
 
+
+def run_delete():
+    email = input('email: ')
+    model.deletebyemail(email)
+    run_list()
+
+
 def main():
     while True:
         cmd = input('(l)ist, (a)dd, (d)elete, (q)uit > ')
@@ -33,7 +40,7 @@ def main():
         elif cmd == 'a':
             run_add()
         elif cmd == 'd':
-            model.deletebyemail()
+            run_delete()
         else:
             print('알 수 없는 명령입니다.')
 

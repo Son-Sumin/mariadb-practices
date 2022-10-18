@@ -3,17 +3,12 @@ from MySQLdb.cursors import DictCursor
 
 def findall():
     try:
-        db = connect(user='webdb',
-                     password='webdb',
-                     host='127.0.0.1',
-                     port=3306,
-                     db='webdb',
-                     charset='utf8')
+        db = conn()
 
         cursor = db.cursor(DictCursor)
 
         sql = 'select first_name, last_name, email from emaillist order by no desc'
-        count = cursor.execute(sql)
+        cursor.execute(sql)
 
         results = cursor.fetchall()
 
@@ -27,20 +22,13 @@ def findall():
 
 def insert(firstname, lastname, email):
     try:
-        db = connect(user='webdb',
-                     password='webdb',
-                     host='127.0.0.1',
-                     port=3306,
-                     db='webdb',
-                     charset='utf8')
-
+        db = conn()
         cursor = db.cursor()
 
-        sql = f"insert into emaillist values(null, '{firstname}', '{lastname}', '{email}')"
-        count = cursor.execute(sql)
+        sql = 'insert into emaillist values(null, %s, %s, %s)'
+        count = cursor.execute(sql, (firstname, lastname, email))    # (firstname, lastname, email); tuple로 입력
 
         db.commit()
-
         cursor.close()
         db.close()
 
@@ -49,5 +37,28 @@ def insert(firstname, lastname, email):
         print(f'에러: {e}')
 
 
-def deletebyemail():
-    print('delete 처리')
+def deletebyemail(email):
+    try:
+        db = conn()
+        cursor = db.cursor()
+
+        sql = 'delete from emaillist where email = %s'
+        count = cursor.execute(sql, (email,))    # (email,); 하나짜리 tuple임을 알려주기 위해 , 찍기
+
+        db.commit()
+        cursor.close()
+        db.close()
+
+        return count == 1
+    except OperationalError as e:  # OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능
+        print(f'에러: {e}')
+
+
+def conn():
+    db = connect(user='webdb',
+                 password='webdb',
+                 host='127.0.0.1',
+                 port=3306,
+                 db='webdb',
+                 charset='utf8')
+    return db
