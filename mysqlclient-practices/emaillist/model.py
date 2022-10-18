@@ -4,7 +4,6 @@ from MySQLdb.cursors import DictCursor
 def findall():
     try:
         db = conn()
-
         cursor = db.cursor(DictCursor)
 
         sql = 'select first_name, last_name, email from emaillist order by no desc'
@@ -16,7 +15,7 @@ def findall():
         db.close()
 
         return results
-    except OperationalError as e:  # OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능
+    except OperationalError as e:
         print(f'에러: {e}')
 
 
@@ -33,7 +32,7 @@ def insert(firstname, lastname, email):
         db.close()
 
         return count == 1
-    except OperationalError as e:  # OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능
+    except OperationalError as e:
         print(f'에러: {e}')
 
 
@@ -50,7 +49,7 @@ def deletebyemail(email):
         db.close()
 
         return count == 1
-    except OperationalError as e:  # OperationalError에서 alt+enter 누르면 나오는 것에서 확인 가능
+    except OperationalError as e:
         print(f'에러: {e}')
 
 
