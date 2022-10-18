@@ -166,7 +166,7 @@ select a.emp_no, a.first_name as manager_name
  where a.emp_no = b.emp_no
    and b.to_date = '9999-01-01';
 
--- sol)
+-- sol) ***
 select a.emp_no, a.first_name, d.manager_name, c.dept_name
   from employees a, dept_manager b, departments c,
        (select a.emp_no, a.first_name as manager_name
@@ -175,7 +175,28 @@ select a.emp_no, a.first_name, d.manager_name, c.dept_name
            and b.to_date = '9999-01-01') d
  where a.emp_no = b.emp_no
    and b.dept_no = c.dept_no
+   and a.emp_no = d.emp_no
    and b.to_date = '9999-01-01';
+   
+-- sol2)
+SELECT 
+    a.emp_no,
+    CONCAT(a.first_name, ' ', a.last_name) as name,
+    CONCAT(d.first_name, ' ', d.last_name) as manage_name,
+    e.dept_name
+FROM
+    employees a,
+    dept_emp b,
+    dept_manager c,
+    employees d,
+    departments e
+WHERE
+    a.emp_no = b.emp_no
+        AND b.dept_no = c.dept_no
+        AND d.emp_no = d.emp_no
+        AND c.dept_no = e.dept_no
+        AND b.to_date = '9999-01-01'
+        AND c.to_date = '9999-01-01';
 
 -- ------------------------------------------------------------------------------
 
@@ -267,9 +288,10 @@ select b.dept_no, avg(a.salary)
 group by b.dept_no;
 
 -- sol)
-  select b.dept_no, avg(a.salary) as max_salary
-    from salaries a, dept_emp b
+  select b.dept_no, c.dept_name, avg(a.salary) as max_salary
+    from salaries a, dept_emp b, departments c
    where a.emp_no = b.emp_no
+     and b.dept_no = c.dept_no
      and a.to_date = '9999-01-01'
      and b.to_date = '9999-01-01'
 group by b.dept_no
@@ -280,6 +302,37 @@ group by b.dept_no
 								  and a.to_date = '9999-01-01'
 		                          and b.to_date = '9999-01-01'
 							 group by b.dept_no) c);
+                             
+-- sol2)
+SELECT 
+    d.dept_name, ROUND(AVG(b.salary)) AS avg_salary
+FROM
+    employees a,
+    salaries b,
+    dept_emp c,
+    departments d
+WHERE
+    a.emp_no = b.emp_no
+        AND a.emp_no = c.emp_no
+        AND c.dept_no = d.dept_no
+        AND b.to_date = '9999-01-01'
+        AND c.to_date = '9999-01-01'
+GROUP BY c.dept_no
+HAVING avg_salary = (SELECT 
+        MAX(avg_salary)
+    FROM
+        (SELECT 
+            ROUND(AVG(b.salary)) AS avg_salary
+        FROM
+            employees a, salaries b, dept_emp c
+        WHERE
+            a.emp_no = b.emp_no
+                AND a.emp_no = c.emp_no
+                AND b.to_date = '9999-01-01'
+                AND c.to_date = '9999-01-01'
+        GROUP BY c.dept_no) a);
+
+-- ------------------------------------------------------------------------------
                              
 -- 문제7.
 -- 평균 연봉이 가장 높은 직책?
@@ -304,10 +357,37 @@ group by b.title
                                  and a.to_date = '9999-01-01'
                                  and b.to_date = '9999-01-01'
                             group by b.title) c);
-   
 
+-- sol2)
+SELECT 
+    c.title, ROUND(AVG(b.salary)) AS avg_salary
+FROM
+    employees a,
+    salaries b,
+    titles c
+WHERE
+    a.emp_no = b.emp_no
+        AND a.emp_no = c.emp_no
+        AND b.to_date = '9999-01-01'
+        AND c.to_date = '9999-01-01'
+GROUP BY c.title
+HAVING avg_salary = (SELECT 
+        MAX(avg_salary)
+    FROM
+        (SELECT 
+            ROUND(AVG(b.salary)) AS avg_salary
+        FROM
+            employees a, salaries b, titles c
+        WHERE
+            a.emp_no = b.emp_no
+                AND a.emp_no = c.emp_no
+                AND b.to_date = '9999-01-01'
+                AND c.to_date = '9999-01-01'
+        GROUP BY c.title) a);
 
--- 문제8.
+-- ------------------------------------------------------------------------------
+
+-- 문제8. ***
 -- 현재 자신의 매니저보다 높은 연봉을 받고 있는 직원은?
 -- 부서이름, 사원이름, 연봉, 매니저 이름, 메니저 연봉 순으로 출력합니다.
 -- 매니저별 연봉
@@ -340,6 +420,8 @@ select c.dept_name, d.first_name, a.salary, e.manager_name, f.sal_manager
  where a.emp_no = b.emp_no
    and b.dept_no = c.dept_no
    and d.emp_no = a.emp_no
+   and e.emp_no = a.emp_no
+   and f.manager_no = a.emp_no
    and a.to_date = '9999-01-01'
    and b.to_date = '9999-01-01'
 group by f.manager_no
