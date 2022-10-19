@@ -33,6 +33,12 @@ for result in results:
     print(result)
 
 print("--카테고리 리스트--")
+model_member.insert('Novel')
+model_member.insert('Essay')
+model_member.insert('IT')
+results = model_member.findall()
+for result in results:
+    print(result)
 
 
 print("--상품리스트--")
