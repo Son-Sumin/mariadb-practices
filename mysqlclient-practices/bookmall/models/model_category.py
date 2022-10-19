@@ -2,19 +2,19 @@ from MySQLdb import connect, OperationalError
 from MySQLdb.cursors import DictCursor
 
 
-def insert(name, phone, email, password):
+def insert(category):
     try:
         db = conn()
         cursor = db.cursor()
 
-        sql = 'insert into member values(null, %s)'
-        count = cursor.execute(sql, (genre,))
+        sql = 'insert into category values(null, %s)'
+        count = cursor.execute(sql, (category,))
 
         db.commit()
         cursor.close()
         db.close()
 
-        print(f"실행결과: {'성공' if count == 1 else '실패'}")
+        return count == 1
     except OperationalError as e:
         print(f'에러: {e}')
 
@@ -23,7 +23,7 @@ def findall():
         db = conn()
         cursor = db.cursor(DictCursor)
 
-        sql = 'select genre from member order by no desc'
+        sql = 'select category from category order by no desc'
         cursor.execute(sql)
 
         results = cursor.fetchall()
@@ -36,13 +36,13 @@ def findall():
         print(f'에러: {e}')
 
 
-def deletebygenre(genre):
+def deletebycategory(category):
     try:
         db = conn()
         cursor = db.cursor()
 
-        sql = 'delete from member where name = %s'
-        count = cursor.execute(sql, (genre,))
+        sql = 'delete from category where category = %s'
+        count = cursor.execute(sql, (category,))
 
         db.commit()
         cursor.close()

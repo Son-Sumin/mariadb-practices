@@ -1,4 +1,9 @@
 from models import model_member
+from models import model_category
+# from models import model_member
+# from models import model_member
+# from models import model_member
+# from models import model_member
 
 def member_list():
     results = model_member.findall()
@@ -18,27 +23,46 @@ def member_add():
     print('--------------------')
     member_list()
 
-
 def member_delete():
-    email = input('name: ')
+    name = input('name: ')
     model_member.deletebyname(name)
     member_list()
 
+def category_list():
+    results = model_category.findall()
+    for index, result in enumerate(results):
+        print(f'{index + 1}: {result["category"]}')
 
-print("--회원 리스트--")
-model_member.insert('짱구', '01022225555', 'zzang@gmail.com', '5555')
-model_member.insert('맹구', '01033336666', 'mang@gmail.com', '6666')
-results = model_member.findall()
-for result in results:
-    print(result)
+def category_add():
+    category = input('category: ')
+    # if firstname == '':
+    #     print(f'입력 필수 항목입니다')
 
-print("--카테고리 리스트--")
-model_member.insert('Novel')
-model_member.insert('Essay')
-model_member.insert('IT')
-results = model_member.findall()
-for result in results:
-    print(result)
+    model_category.insert(category)
+
+    print('--------------------')
+    category_list()
+
+def category_delete():
+    category = input('category: ')
+    model_category.deletebycategory(category)
+    category_list()
+
+
+# print("--회원 리스트--")
+# model_member.insert('짱구', '01022225555', 'zzang@gmail.com', '5555')
+# model_member.insert('맹구', '01033336666', 'mang@gmail.com', '6666')
+# results = model_member.findall()
+# for result in results:
+#     print(result)
+#
+# print("\n--카테고리 리스트--")
+# model_category.insert('Novel')
+# model_category.insert('Essay')
+# model_category.insert('IT')
+# results = model_category.findall()
+# for result in results:
+#     print(result)
 
 
 print("--상품리스트--")

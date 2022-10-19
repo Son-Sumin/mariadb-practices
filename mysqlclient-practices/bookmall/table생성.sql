@@ -15,7 +15,7 @@ desc member;
 
 create table category(
   no int(20) not null auto_increment,
-  genre varchar(100) not null,
+  category varchar(100) not null,
   primary key(no)
 );
 desc category;

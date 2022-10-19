@@ -21,7 +21,7 @@ def insert(name, phone, email, password):
         cursor.close()
         db.close()
 
-        print(f"실행결과: {'성공' if count == 1 else '실패'}")
+        return count == 1
     except OperationalError as e:
         print(f'에러: {e}')
 
