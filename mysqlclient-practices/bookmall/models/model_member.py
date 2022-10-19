@@ -1,14 +1,20 @@
+# def insert():
+#     print("member 추가")
+#
+# def findall():
+#     print("member list 가져오기")
+
+
 from MySQLdb import connect, OperationalError
 from MySQLdb.cursors import DictCursor
 
 
 def insert(name, phone, email, password):
-    print('member 가져오기')
     try:
         db = conn()
         cursor = db.cursor()
 
-        sql = 'insert into member values(null, %s, %d, %s, %s)'
+        sql = 'insert into member values(null, %s, %s, %s, %s)'
         count = cursor.execute(sql, (name, phone, email, password))
 
         db.commit()
@@ -20,7 +26,6 @@ def insert(name, phone, email, password):
         print(f'에러: {e}')
 
 def findall():
-    print("member list 가져오기")
     try:
         db = conn()
         cursor = db.cursor(DictCursor)
