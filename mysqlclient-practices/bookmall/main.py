@@ -1,6 +1,6 @@
 from models import model_member
 from models import model_category
-# from models import model_member
+# from models import model_orders
 # from models import model_member
 # from models import model_member
 # from models import model_member
@@ -65,13 +65,17 @@ def category_delete():
 #     print(result)
 
 
-print("--상품리스트--")
+print("\n--상품리스트--")
+# model_member.insert('짱구', '01022225555', 'zzang@gmail.com', '5555')
+# results = model_member.findall()
+# for result in results:
+#     print(result)
 
 
-print("--카트 리스트--")
+print("\n--카트 리스트--")
 
 
-print("--주문 리스트--")
+print("\n--주문 리스트--")
 
 
-print("--주문 도서 리스트--")
+print("\n--주문 도서 리스트--")
