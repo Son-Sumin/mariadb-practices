@@ -3,14 +3,14 @@ from MySQLdb._exceptions import OperationalError
 from MySQLdb.cursors import DictCursor
 
 
-def insert(title, price):
+def insert(category_no, title, price):
     try:
         db = conn()
 
         cursor = db.cursor()
 
-        sql = 'insert into book values(null, null, %s, %s, null,null)'
-        count = cursor.execute(sql,(title, price))
+        sql = 'insert into book values(null, %s, %s, %s, null)'
+        count = cursor.execute(sql,(category_no, title, price))
 
         db.commit()
         cursor.close()
@@ -27,7 +27,7 @@ def findall():
 
         cursor = db.cursor(DictCursor)
 
-        sql = 'select title, price from book order by no desc'
+        sql = 'select a.category_no, a.title, a.price from book a, category b where a.category_no = b.no order by a.no desc'
         cursor.execute(sql)
 
         results = cursor.fetchall()
