@@ -1,4 +1,5 @@
 from MySQLdb import connect, OperationalError
+# 해당 글자에서 alt + enter
 
 try:
     # 연결
