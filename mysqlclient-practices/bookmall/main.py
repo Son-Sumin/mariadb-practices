@@ -10,58 +10,35 @@ def member_list():
     for index, result in enumerate(results):
         print(f'{index + 1}: {result["name"]} / {result["phone"]} / {result["email"]} / {result["password"]}')
 
-def member_add():
-    name = input('name: ')
-    phone = input('phone: ')
-    email = input('email: ')
-    password = input('password: ')
-    model_member.insert(name, phone, email, password)
-
-    print('--------------------')
-    member_list()
-
-def member_delete():
-    name = input('name: ')
-    model_member.deletebyname(name)
-    member_list()
 
 def category_list():
     results = model_category.findall()
     for index, result in enumerate(results):
         print(f'{index + 1}: {result["category"]}')
 
-def category_add():
-    category = input('category: ')
-    model_category.insert(category)
-
-    print('--------------------')
-    category_list()
-
-def category_delete():
-    category = input('category: ')
-    model_category.deletebycategory(category)
-    category_list()
 
 def book_list():
     results = model_book.findall()
     for index, result in enumerate(results):
-        print(f'{index + 1}: {result["category_no"]} / {result["title"]} / {result["price"]}')
-
-def book_add():
-    category_no = input('category_no: ')
-    title = input('title: ')
-    price = input('price: ')
-    model_book.insert(category_no, title, price)
-
-    print('--------------------')
-    book_list()
-
-def book_delete():
-    title = input('title: ')
-    model_book.deletebytitle(title)
-    book_list()
+        print(f'{index + 1}: {result["category"]} / {result["title"]} / {result["price"]}')
 
 
+# def orders_list():
+#     results = model_orders.findall()
+#     for index, result in enumerate(results):
+#         print(f'{index + 1}: {result["orders_number"]} / {result["name"]} / {result["email"]} / {result["payment"]}/ {result["delivery_address"]}')
+#
+#
+# def cart_list():
+#     results = model_cart.findall()
+#     for index, result in enumerate(results):
+#         print(f'{index + 1}: {result["book_title"]} / {result["amount"]} / {result["price"]})
+#
+#
+# def orders_book_list():
+#     results = model_______.findall()
+#     for index, result in enumerate(results):
+#         print(f'{index + 1}: {result["book_no"]} / {result["title"]} / {result["amount"]}')
 
 
 # print("--회원 리스트--")
@@ -76,9 +53,9 @@ model_category.insert('IT')
 category_list()
 
 print("\n--상품리스트--")
-model_book.insert('1', '짱구의 운수좋은날', '20000')
-model_book.insert('2', '맹구의 여행', '25000')
-model_book.insert('3', '철수의 python 입문', '22000')
+model_book.insert('Novel(1)', '짱구의 운수좋은날', '20000')
+model_book.insert('Essay(2)', '맹구의 여행', '25000')
+model_book.insert('IT(3)', '철수의 python 입문', '22000')
 book_list()
 
 

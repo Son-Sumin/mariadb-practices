@@ -1,4 +1,9 @@
 from models import model_member
+from models import model_category
+from models import model_book
+# from models import model_member
+# from models import model_member
+# from models import model_member
 
 def member_list():
     results = model_member.findall()
@@ -10,19 +15,51 @@ def member_add():
     phone = input('phone: ')
     email = input('email: ')
     password = input('password: ')
-    # if firstname == '':
-    #     print(f'입력 필수 항목입니다')
-
     model_member.insert(name, phone, email, password)
 
     print('--------------------')
     member_list()
 
-
 def member_delete():
-    email = input('name: ')
+    name = input('name: ')
     model_member.deletebyname(name)
     member_list()
+
+def category_list():
+    results = model_category.findall()
+    for index, result in enumerate(results):
+        print(f'{index + 1}: {result["category"]}')
+
+def category_add():
+    category = input('category: ')
+    model_category.insert(category)
+
+    print('--------------------')
+    category_list()
+
+def category_delete():
+    category = input('category: ')
+    model_category.deletebycategory(category)
+    category_list()
+
+def book_list():
+    results = model_book.findall()
+    for index, result in enumerate(results):
+        print(f'{index + 1}: {result["category"]} / {result["title"]} / {result["price"]}')
+
+def book_add():
+    category_no = input('category_no: ')
+    title = input('title: ')
+    price = input('price: ')
+    model_book.insert(category_no, title, price)
+
+    print('--------------------')
+    book_list()
+
+def book_delete():
+    title = input('title: ')
+    model_book.deletebytitle(title)
+    book_list()
 
 
 # print("--회원 리스트--")
