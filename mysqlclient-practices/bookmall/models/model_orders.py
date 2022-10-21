@@ -2,13 +2,13 @@ from MySQLdb import connect, OperationalError
 from MySQLdb.cursors import DictCursor
 
 
-def insert(orders_number, member_name_email, payment, delivery_address):
+def insert(orders_number, member_no, payment, delivery_address):
     try:
         db = conn()
         cursor = db.cursor()
 
-        sql = 'insert into member values(null, %s, null, %s, %s, %s, null)'
-        count = cursor.execute(sql, (orders_number, member_name_email, payment, delivery_address))
+        sql = 'insert into orders values(null, %s, %s, %s, %s)'
+        count = cursor.execute(sql, (orders_number, member_no, payment, delivery_address))
 
         db.commit()
         cursor.close()
@@ -23,7 +23,7 @@ def findall():
         db = conn()
         cursor = db.cursor(DictCursor)
 
-        sql = 'select orders_number, member_name_email, payment, delivery_address from orders order by no desc'
+        sql = 'select a.orders_number, b.name, b.email, a.payment, a.delivery_address from orders a, member b where a.member_no = b.no order by a.no desc'
         cursor.execute(sql)
 
         results = cursor.fetchall()

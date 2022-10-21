@@ -9,7 +9,7 @@ def insert(category_no, title, price):
 
         cursor = db.cursor()
 
-        sql = 'insert into book values(null, %s, %s, %s, null)'
+        sql = 'insert into book values(null, %s, %s, %s)'
         count = cursor.execute(sql,(category_no, title, price))
 
         db.commit()

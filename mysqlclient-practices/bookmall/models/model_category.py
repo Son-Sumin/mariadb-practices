@@ -23,7 +23,7 @@ def findall():
         db = conn()
         cursor = db.cursor(DictCursor)
 
-        sql = 'select category from category order by no desc'
+        sql = 'select category from category order by no'
         cursor.execute(sql)
 
         results = cursor.fetchall()

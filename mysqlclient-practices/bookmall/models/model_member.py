@@ -30,7 +30,7 @@ def findall():
         db = conn()
         cursor = db.cursor(DictCursor)
 
-        sql = 'select name, phone, email, password from member order by no desc'
+        sql = 'select name, phone, email, password from member'
         cursor.execute(sql)
 
         results = cursor.fetchall()
