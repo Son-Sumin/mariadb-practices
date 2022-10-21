@@ -1,13 +1,14 @@
 from MySQLdb import connect, OperationalError
 from MySQLdb.cursors import DictCursor
 
-def insert(name, phone, email, password):
+def insert(category_no, title, price):
     try:
         db = conn()
+
         cursor = db.cursor()
 
-        sql = 'insert into member values(null, %s, %s, %s, %s)'
-        count = cursor.execute(sql, (name, phone, email, password))
+        sql = 'insert into book values(null, %s, %s, %s)'
+        count = cursor.execute(sql,(category_no, title, price))
 
         db.commit()
         cursor.close()
@@ -17,12 +18,14 @@ def insert(name, phone, email, password):
     except OperationalError as e:
         print(f'에러: {e}')
 
+
 def findall():
     try:
         db = conn()
+
         cursor = db.cursor(DictCursor)
 
-        sql = 'select name, phone, email, password from member'
+        sql = 'select b.book_no, a.title, b.amount from book a, cart b where a.no = b.book_no'
         cursor.execute(sql)
 
         results = cursor.fetchall()
@@ -33,3 +36,13 @@ def findall():
         return results
     except OperationalError as e:
         print(f'에러: {e}')
+
+
+def conn():
+    db = connect(user='bookmall',
+                 password='bookmall',
+                 host='127.0.0.1',
+                 port=3306,
+                 db='bookmall',
+                 charset='utf8')
+    return db

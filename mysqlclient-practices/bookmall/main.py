@@ -3,7 +3,7 @@ from models import model_category
 from models import model_book
 from models import model_cart
 from models import model_orders
-# from models import model_member
+from models import model_orders_book
 
 def member_list():
     results = model_member.findall()
@@ -33,12 +33,12 @@ def orders_list():
     for index, result in enumerate(results):
         print(f'{index + 1}: {result["orders_number"]} / {result["name"]}/ {result["email"]} / 결제금액: {result["payment"]}원/ {result["delivery_address"]}')
 
-#
-#
-# def orders_book_list():
-#     results = model_______.findall()
-#     for index, result in enumerate(results):
-#         print(f'{index + 1}: {result["book_no"]} / {result["title"]} / {result["amount"]}')
+
+
+def orders_book_list():
+    results = model_orders_book.findall()
+    for index, result in enumerate(results):
+        print(f'{index + 1}: 도서번호 {result["book_no"]} / {result["title"]} / {result["amount"]}권')
 
 
 print("--회원 리스트--")
@@ -69,3 +69,6 @@ orders_list()
 
 
 print("\n--주문 도서 리스트--")
+model_orders_book.insert('1', '짱구의 운수좋은날', '20000')
+model_orders_book.insert('2', '맹구의 여행', '25000')
+orders_book_list()
