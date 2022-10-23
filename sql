@@ -2,7 +2,7 @@
 -- 예시1) C:\Program Files\MariaDB 10.5\bin
 -- 예시2) C:\Program Files\Java\jdk-12.0.2\bin
 
---workbench 접속 후
+--workbench 접속 후 root 생성 후 그 곳에서 다른 db 생성
 --현상태 확인
 show tables;
 select * from user;
