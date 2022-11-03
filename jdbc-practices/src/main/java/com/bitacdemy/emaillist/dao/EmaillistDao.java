@@ -17,12 +17,16 @@ public class EmaillistDao {
 	
 //	public List<EmaillistVo> findAll() {
 //		List<EmaillistVo> result = new ArrayList<>();
+//	for (EmaillistVo vo : list) {
+//		System.out.println("이름: " + vo.getFirstName() + " " + vo.getLastName() + ", 이메일: " + vo.getEmail());
+//	}
 //	public static void main(String[] args) {
 //		List<String> list = new LinkedList<>();
 
 	
-	public List<EmaillistVo> insert(first_name, last_name, email) {
-		List<EmaillistVo> result = new LinkedList<>();
+	public Boolean insert(EmaillistVo vo) {
+		List<EmaillistVo> result1 = new LinkedList<>();
+		//for (EmaillistVo vo1 : result1) {
 		
 		boolean result = false;
 		Connection conn = null;
@@ -37,9 +41,8 @@ public class EmaillistDao {
 			stmt = conn.createStatement();
 			
 			String sql = 
-				" insert" + 
-				" into emaillist" +
-				" values(null, '"+ first_name + "', " + last_name + "," + email + "')";
+				" insert into emaillist" +
+				" values(null, '"+ vo.getFirstName() + "', " + vo.getLastName() + "," + vo.getEmail() + "')";
 			
 			int count = stmt.executeUpdate(sql);
 			result = count == 1;
@@ -62,11 +65,45 @@ public class EmaillistDao {
 		}
 		return result;
 	}
-
+//------------------------------------------------------------
 	public Boolean deleteByEmail(String email) {
-		return false;
-	}
+		boolean result = false;
+		Connection conn = null;  
+		Statement stmt = null;
 
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
+			conn = DriverManager.getConnection(url, "webdb", "webdb");
+
+			stmt = conn.createStatement();
+
+			String sql = 
+					"delete from emaillist" +
+					" where email= " + email;
+			int count = stmt.executeUpdate(sql);
+			return result = count == 1;
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패: " + e);
+		} catch (SQLException e) {
+			System.out.println("Error: " + e);
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return result;
+	}
+//------------------------------------------------------------
 	public List<EmaillistVo> findAll() {
 		List<EmaillistVo> result = new ArrayList<>();
 
@@ -84,8 +121,7 @@ public class EmaillistDao {
 
 			String sql = 
 					"select first_name, last_name, email" + 
-					" from emaillist" + 
-					" order by no desc";
+					" from emaillist order by no desc";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {

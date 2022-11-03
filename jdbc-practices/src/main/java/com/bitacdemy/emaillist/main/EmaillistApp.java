@@ -32,7 +32,9 @@ public class EmaillistApp {
 	}
 
 	private static void doDelete() {
-		// TODO Auto-generated method stub
+		System.out.print("이메일: ");
+		String email = scanner.nextLine();
+		
 		doList();
 	}
 
