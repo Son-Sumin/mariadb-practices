@@ -9,7 +9,6 @@ public class EmaillistDaoTest {
 
 	public static void main(String[] args) {
 		testFindAll();
-
 	}
 
 	private static void testFindAll() {

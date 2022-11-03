@@ -2,8 +2,8 @@
  * Maven Project로 jdbc-practices 만들기
  * pom; <properties></properties> <dependencies><dependency></dependency></dependencies> <build></build> 수정
  * <dependency></dependency>은 MariaDB Java Client googling -> 원하는 버전 copy&paste
- * ignore 이클립스 관련 기본 
- * 
+ * ignore 이클립스, 파이참 등 사용 언어 관련 기본 파일 확장자 적기
+ * __pycache__ .vscode .idea venv target/ .classpath .project .settings
  */
 
 package test;

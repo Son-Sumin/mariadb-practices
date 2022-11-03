@@ -25,12 +25,11 @@ public class EmaillistDao {
 
 	
 	public Boolean insert(EmaillistVo vo) {
-		List<EmaillistVo> result1 = new LinkedList<>();
-		//for (EmaillistVo vo1 : result1) {
-		
+	
 		boolean result = false;
 		Connection conn = null;
 		Statement stmt = null;
+		
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
