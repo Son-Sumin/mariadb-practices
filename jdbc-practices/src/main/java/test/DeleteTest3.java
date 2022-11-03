@@ -5,18 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UpdatTest {
+public class DeleteTest3 {
 
 	public static void main(String[] args) {
-		DeptVo vo = new DeptVo();
-		vo.setNo(1L);
-		vo.setName("경영지원");
-		
-		boolean result = update(vo);
+		boolean result = delete(28L);
 		System.out.println(result ? "성공" : "실패");
 	}
 
-	private static boolean update(DeptVo deptVo) {
+	private static boolean delete(Long no) {
 		boolean result = false;
 		Connection conn = null;  
 		Statement stmt = null;
@@ -34,12 +30,13 @@ public class UpdatTest {
 
 			// 4. SQL 실행
 			String sql = 
-					 "update dept" + 
-					 " set name = '" + deptVo.getName() + "'" + 
-					 " where no = " + deptVo.getNo();
-			int count = stmt.executeUpdate(sql);
+					"delete" +  
+					" from dept" +
+					" where no= " + no;
 			
-			result = count == 1;
+			// 결과 확인
+			int count = stmt.executeUpdate(sql);
+			return result = count == 1;
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패: " + e);
@@ -55,10 +52,9 @@ public class UpdatTest {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		
-		
+
+		}
 		return result;
-	}
-	
+
 	}
 }

@@ -1,7 +1,8 @@
 /*
  * Maven Project로 jdbc-practices 만들기
- * pom <properties></properties> <dependencies></dependencies> <build></build> 수정
- * ignore 이클립스
+ * pom; <properties></properties> <dependencies><dependency></dependency></dependencies> <build></build> 수정
+ * <dependency></dependency>은 MariaDB Java Client googling -> 원하는 버전 copy&paste
+ * ignore 이클립스 관련 기본 
  * 
  */
 
@@ -11,20 +12,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionTest {
+public class ConnectionTest1 {
 
 	public static void main(String[] args) {
 		Connection conn = null;
+		// try블락 지역변수 -> try블락 에러 시 finally에서 close()할 수 있도록 밖으로 빼기
+		
 		try {
 			// 1. JDBC Driver Class Loading (not using new, using class code)
-			Class.forName("org.mariadb.jdbc.Driver"); // 해당 ""은 알아야 한다. googling
+			// 해당 ""은 알아야 한다. googling~
+			Class.forName("org.mariadb.jdbc.Driver");
 
 			// 2. 연결하기
 			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8"; // "" 알아한다. 프로그램마다 url 다름. url 기억해야함
 			conn = DriverManager.getConnection(url, "webdb", "webdb");  //(url, "name", "password")
-			//url = 
 
 			System.out.println("sussess!");
+			
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패: " + e);
 		} catch (SQLException e) {

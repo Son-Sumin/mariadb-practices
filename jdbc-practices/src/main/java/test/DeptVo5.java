@@ -1,7 +1,7 @@
 package test;
 //VO; 데이터베이스 row를 담는 객체
 
-public class DeptVo {
+public class DeptVo5 {
 	private Long no;
 	private String name;
 

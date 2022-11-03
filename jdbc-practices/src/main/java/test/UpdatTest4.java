@@ -5,37 +5,42 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DeleteTest {
+public class UpdatTest4 {
 
 	public static void main(String[] args) {
-		boolean result = delete(22L);
+		DeptVo5 vo = new DeptVo5();
+		vo.setNo(1L);
+		vo.setName("경영지원");
+		
+		boolean result = update(vo);
 		System.out.println(result ? "성공" : "실패");
 	}
 
-	private static boolean delete(Long no) {
+	private static boolean update(DeptVo5 deptVo) {
 		boolean result = false;
 		Connection conn = null;  
-		Statement stmt = null;  // database 자원 정리 필수, close는 역순으로 기입
+		Statement stmt = null;
 
 		try {
 			// 1. JDBC Driver Class Loading (not using new, using class code)
-			Class.forName("org.mariadb.jdbc.Driver"); // 해당 ""은 알아야 한다. googling
+			Class.forName("org.mariadb.jdbc.Driver");
 
 			// 2. 연결하기
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8"; // "" 알아한다. 프로그램마다 url 다름. url 기억해야함
-			conn = DriverManager.getConnection(url, "webdb", "webdb");  //(url, "name", "password")
+			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
+			conn = DriverManager.getConnection(url, "webdb", "webdb");
 
 			// 3. Statement 생성
 			stmt = conn.createStatement();
 
 			// 4. SQL 실행
 			String sql = 
-					"delete" +  
-					" from dept" +
-					" where no= " + no;
+					 "update dept" + 
+					 " set name = '" + deptVo.getName() + "'" + 
+					 " where no = " + deptVo.getNo();
+			
+			// 결과 확인
 			int count = stmt.executeUpdate(sql);
-
-			return result = count == 1;
+			result = count == 1;
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패: " + e);
@@ -51,9 +56,7 @@ public class DeleteTest {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 		}
 		return result;
-
 	}
 }

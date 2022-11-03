@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SelectTest {
+public class SelectTest5 {
 
 	public static void main(String[] args) {
 		search("pat");
@@ -19,11 +19,11 @@ public class SelectTest {
 
 		try {
 			// 1. JDBC Driver Class Loading (not using new, using class code)
-			Class.forName("org.mariadb.jdbc.Driver"); // 해당 ""은 알아야 한다. googling
+			Class.forName("org.mariadb.jdbc.Driver");
 
 			// 2. 연결하기
-			String url = "jdbc:mysql://127.0.0.1:3306/employees?charset=utf8"; // "" 알아한다. 프로그램마다 url 다름. url 기억해야함
-			conn = DriverManager.getConnection(url, "hr", "hr");  //(url, "name", "password")
+			String url = "jdbc:mysql://127.0.0.1:3306/employees?charset=utf8";
+			conn = DriverManager.getConnection(url, "hr", "hr");
 
 			// 3. Statement 생성
 			stmt = conn.createStatement();
@@ -32,8 +32,9 @@ public class SelectTest {
 			String sql = 
 					"select emp_no, first_name" + 
 					" from employees" + 
-					" where first_name like '%" + keyword + "%'"; // ' 맨마지막 ; 붙이기 말기!!!
-			rs = stmt.executeQuery(sql);
+					" where first_name like '%" + keyword + "%'";
+			
+			??rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
 				Long empNo = rs.getLong(1); // database는 1부터 시작, 1대신 "emp_no" 기입 가능
