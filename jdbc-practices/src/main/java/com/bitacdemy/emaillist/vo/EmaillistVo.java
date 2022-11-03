@@ -5,6 +5,7 @@ public class EmaillistVo {
 	private String firstName;
 	private String lastName;
 	private String email;
+
 	public Long getNo() {
 		return no;
 	}
@@ -31,10 +32,7 @@ public class EmaillistVo {
 	}
 	@Override
 	public String toString() {
-		return "EmaillistVo [no=" + no + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ "]";
+		return "EmaillistVo [no=" + no + ", firstName=" + firstName + 
+				", lastName=" + lastName + ", email=" + email + "]";
 	}
-
-	
-	
 }

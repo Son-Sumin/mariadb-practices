@@ -37,7 +37,7 @@ public class InsertTest2 {
 			
 			// 결과 확인; [성공]count==1 / [실패]count==0  -> 워크벤치에서 확인
 			int count = stmt.executeUpdate(sql);
-			??result = count == 1;
+			result = count == 1;    //result = (count == 1) 와 동일;
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);

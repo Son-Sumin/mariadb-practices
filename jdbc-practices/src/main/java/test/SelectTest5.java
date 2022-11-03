@@ -34,7 +34,7 @@ public class SelectTest5 {
 					" from employees" + 
 					" where first_name like '%" + keyword + "%'";
 			
-			??rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
 				Long empNo = rs.getLong(1); // database는 1부터 시작, 1대신 "emp_no" 기입 가능

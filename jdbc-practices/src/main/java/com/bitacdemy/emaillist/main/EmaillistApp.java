@@ -46,7 +46,8 @@ public class EmaillistApp {
 		System.out.print("이메일: ");
 		String email = scanner.nextLine();
 
-		System.out.println(firstName + ":" + lastName + ":" + "email");
+		System.out.println(firstName + ":" + lastName + ":" + email);
+		
 		doList();
 	}
 
