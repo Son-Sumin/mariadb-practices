@@ -1,10 +1,10 @@
-package com.bitacademy.emaillist.main;
+package com.bitacdemy.emaillist.main;
 
 import java.util.List;
 import java.util.Scanner;
 
-import com.bitacademy.emaillist.dao.EmaillistDao;
-import com.bitacademy.emaillist.vo.EmaillistVo;
+import com.bitacdemy.emaillist.dao.EmaillistDao;
+import com.bitacdemy.emaillist.vo.EmaillistVo;
 
 public class EmaillistApp {
 

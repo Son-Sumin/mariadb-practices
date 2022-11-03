@@ -1,4 +1,4 @@
-package com.bitacademy.emaillist.dao;
+package com.bitacdemy.emaillist.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bitacademy.emaillist.vo.EmaillistVo;
+import com.bitacdemy.emaillist.vo.EmaillistVo;
 
 public class EmaillistDao {
 	public Boolean insert(EmaillistVo vo) {

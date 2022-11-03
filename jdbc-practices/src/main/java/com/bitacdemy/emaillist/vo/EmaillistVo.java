@@ -1,4 +1,4 @@
-package com.bitacademy.emaillist.vo;
+package com.bitacdemy.emaillist.vo;
 
 public class EmaillistVo {
 	private Long no;
