@@ -35,8 +35,8 @@ public class UpdatTest {
 			// 4. SQL 실행
 			String sql = 
 					 "update dept" + 
-					 "  set name = '" + deptVo.getName() + "'" + 
-					 "where no = " + deptVo.getNo();
+					 " set name = '" + deptVo.getName() + "'" + 
+					 " where no = " + deptVo.getNo();
 			int count = stmt.executeUpdate(sql);
 			
 			result = count == 1;

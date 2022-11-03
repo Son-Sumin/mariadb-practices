@@ -14,7 +14,7 @@ public class EmaillistDaoTest {
 
 	private static void testFindAll() {
 		List<EmaillistVo> list = new EmaillistDao().findAll();
-		for(EmaillistVo vo : list) {
+		for (EmaillistVo vo : list) {
 			System.out.println(vo);
 		}
 	}

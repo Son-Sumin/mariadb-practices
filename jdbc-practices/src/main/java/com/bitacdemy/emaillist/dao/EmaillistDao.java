@@ -14,40 +14,42 @@ public class EmaillistDao {
 	public Boolean insert(EmaillistVo vo) {
 		return false;
 	}
+
 	public Boolean deleteByEmail(String email) {
 		return false;
 	}
+
 	public List<EmaillistVo> findAll() {
-		List<EmaillistVo> result = new ArrayList();
-		
-		Connection conn = null;  
+		List<EmaillistVo> result = new ArrayList<>();
+
+		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8"; 
+			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 
 			stmt = conn.createStatement();
 
 			String sql = 
-					"select first_name, last_name, email" +
+					"select first_name, last_name, email" + 
 					" from emaillist" + 
-					 " order by no desc";
+					" order by no desc";
 			rs = stmt.executeQuery(sql);
-			
+
 			while (rs.next()) {
 				String firstName = rs.getString(1);
 				String lastName = rs.getString(2);
 				String email = rs.getString(3);
-				
+
 				EmaillistVo vo = new EmaillistVo();
-				vo.setFirst_name(firstName);
-				vo.setLast_name(lastName);
+				vo.setFirstName(firstName);
+				vo.setLastName(lastName);
 				vo.setEmail(email);
-				
+
 				result.add(vo);
 			}
 
@@ -69,8 +71,6 @@ public class EmaillistDao {
 				e.printStackTrace();
 			}
 		}
-
-		
 		return result;
-		}
+	}
 }

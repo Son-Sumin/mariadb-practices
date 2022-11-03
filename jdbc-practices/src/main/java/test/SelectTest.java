@@ -31,9 +31,10 @@ public class SelectTest {
 			// 4. SQL 실행
 			String sql = 
 					"select emp_no, first_name" + 
-					"  from employees" + 
+					" from employees" + 
 					" where first_name like '%" + keyword + "%'"; // ' 맨마지막 ; 붙이기 말기!!!
 			rs = stmt.executeQuery(sql);
+			
 			while (rs.next()) {
 				Long empNo = rs.getLong(1); // database는 1부터 시작, 1대신 "emp_no" 기입 가능
 				String firstName = rs.getString(2);

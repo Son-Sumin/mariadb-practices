@@ -9,7 +9,7 @@ import com.bitacdemy.emaillist.vo.EmaillistVo;
 public class EmaillistApp {
 
 	private static Scanner scanner = null;
-	
+
 	public static void main(String[] args) {
 		scanner = new Scanner(System.in);
 
@@ -39,23 +39,23 @@ public class EmaillistApp {
 	private static void doAdd() {
 		System.out.print("성: ");
 		String firstName = scanner.nextLine();
-		
+
 		System.out.print("이름: ");
-		String lastName = scanner.nextLine();	
-		
+		String lastName = scanner.nextLine();
+
 		System.out.print("이메일: ");
-		String email = scanner.nextLine();	
-		
+		String email = scanner.nextLine();
+
 		System.out.println(firstName + ":" + lastName + ":" + "email");
 		doList();
-		}
+	}
 
 	private static void doList() {
 		List<EmaillistVo> list = new EmaillistDao().findAll();
-		for(EmaillistVo vo : list) {
-			System.out.println("이름: " + vo.getFirst_name() + " " + vo.getLast_name() + ", 이메일: " + vo.getEmail());
+		for (EmaillistVo vo : list) {
+			System.out.println("이름: " + vo.getFirstName() + " " + vo.getLastName() + ", 이메일: " + vo.getEmail());
 		}
-		
+
 	}
 
 }

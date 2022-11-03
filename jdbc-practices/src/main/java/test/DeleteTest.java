@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class DeleteTest {
 
 	public static void main(String[] args) {
-		boolean result = delete(7L);
+		boolean result = delete(22L);
 		System.out.println(result ? "성공" : "실패");
 	}
 
@@ -31,8 +31,8 @@ public class DeleteTest {
 			// 4. SQL 실행
 			String sql = 
 					"delete" +  
-					"  from dept" +
-					 "where no= " + no;
+					" from dept" +
+					" where no= " + no;
 			int count = stmt.executeUpdate(sql);
 
 			return result = count == 1;
