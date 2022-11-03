@@ -2,3 +2,8 @@
 **/.vscode
 **/.idea
 **/venv
+
+**/target/
+**/.classpath
+**/.project
+**/.settings
