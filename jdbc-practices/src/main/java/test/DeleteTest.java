@@ -32,9 +32,9 @@ public class DeleteTest {
 			String sql = 
 					"delete" +  
 					"  from dept" +
-					 "where no=" + 8;
+					 "where no= " + no;
 			int count = stmt.executeUpdate(sql);
-			
+
 			return result = count == 1;
 
 		} catch (ClassNotFoundException e) {
@@ -51,10 +51,9 @@ public class DeleteTest {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		
-		
+
+		}
 		return result;
-	}
-	
+
 	}
 }

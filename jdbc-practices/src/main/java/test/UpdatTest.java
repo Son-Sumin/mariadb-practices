@@ -11,6 +11,7 @@ public class UpdatTest {
 		DeptVo vo = new DeptVo();
 		vo.setNo(1L);
 		vo.setName("경영지원");
+		
 		boolean result = update(vo);
 		System.out.println(result ? "성공" : "실패");
 	}
@@ -38,7 +39,7 @@ public class UpdatTest {
 					 "where no = " + deptVo.getNo();
 			int count = stmt.executeUpdate(sql);
 			
-			return result = count == 1;
+			result = count == 1;
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패: " + e);
