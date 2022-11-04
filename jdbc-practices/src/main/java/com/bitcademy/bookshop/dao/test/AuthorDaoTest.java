@@ -17,9 +17,10 @@ public class AuthorDaoTest {
 	private static void testInsert(String name) {
 		AuthorDao dao = new AuthorDao();
 		
-		AuthorVo vo = null;
+//		AuthorVo vo = null;
+//		vo = new AuthorVo();
 		
-		vo = new AuthorVo();
+		AuthorVo vo = new AuthorVo();
 		vo.setName(name);
 		dao.insert(vo);
 		

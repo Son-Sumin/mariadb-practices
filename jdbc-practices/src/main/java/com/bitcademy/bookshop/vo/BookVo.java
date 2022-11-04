@@ -5,6 +5,7 @@ public class BookVo {
 	private String title;
 	private String status;
 	private Long authorNo;
+	
 	public Long getNo() {
 		return no;
 	}
@@ -29,6 +30,4 @@ public class BookVo {
 	public void setAuthorNo(Long authorNo) {
 		this.authorNo = authorNo;
 	}
-	
-	
 }
