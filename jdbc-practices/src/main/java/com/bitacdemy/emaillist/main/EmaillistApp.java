@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.bitacdemy.emaillist.dao.EmaillistDao;
 import com.bitacdemy.emaillist.vo.EmaillistVo;
+import com.bitcademy.bookshop.vo.BookVo;
 
 public class EmaillistApp {
 
@@ -26,7 +27,6 @@ public class EmaillistApp {
 			} else if ("q".equals(command)) {
 				break;
 			}
-
 		}
 		scanner.close();
 	}
@@ -35,6 +35,7 @@ public class EmaillistApp {
 		System.out.print("이메일: ");
 		String email = scanner.nextLine();
 		
+		new EmaillistDao().deleteByEmail(email);
 		doList();
 	}
 
@@ -50,6 +51,8 @@ public class EmaillistApp {
 
 		System.out.println(firstName + ":" + lastName + ":" + email);
 		
+		EmaillistVo vo = new EmaillistVo();
+		new EmaillistDao().insert(vo.getFirstName(), vo.getLastName(), vo.getEmail());
 		doList();
 	}
 

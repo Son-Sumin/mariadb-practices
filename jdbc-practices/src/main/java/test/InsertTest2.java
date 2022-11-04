@@ -34,7 +34,7 @@ public class InsertTest2 {
 			String sql = 
 				" insert" +
 				" into dept" +
-				" values (null, '" + name + "')";
+				" values (null, '" + name + "')";  // "" 안에 띄워쓰기 하기
 			
 			// 결과 확인; [성공]count==1 / [실패]count==0  -> 워크벤치에서 확인
 			int count = stmt.executeUpdate(sql);

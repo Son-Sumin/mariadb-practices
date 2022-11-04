@@ -30,7 +30,7 @@ public class DeleteTest3 {
 
 			// 4. SQL 실행
 			String sql = 
-					"delete" +  
+					" delete" +  
 					" from dept" +
 					" where no= " + no;
 			

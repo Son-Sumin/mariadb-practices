@@ -14,28 +14,15 @@ import com.bitacdemy.emaillist.vo.EmaillistVo;
 // DAO-CRUD / IO-데이터베이스 row를 담는 객체 -> single responsibility
 
 public class EmaillistDao {
-	
-//	public List<EmaillistVo> findAll() {
-//		List<EmaillistVo> result = new ArrayList<>();
-//	for (EmaillistVo vo : list) {
-//		System.out.println("이름: " + vo.getFirstName() + " " + vo.getLastName() + ", 이메일: " + vo.getEmail());
-//	}
-//	public static void main(String[] args) {
-//		List<String> list = new LinkedList<>();
 
-	
 	public Boolean insert(EmaillistVo vo) {
 	
 		boolean result = false;
 		Connection conn = null;
 		Statement stmt = null;
 		
-		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
+			conn = getConnection();
 			
 			stmt = conn.createStatement();
 			
@@ -46,8 +33,6 @@ public class EmaillistDao {
 			int count = stmt.executeUpdate(sql);
 			result = count == 1;
 			
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
 			System.out.println("Error:" + e);
 		} finally {
@@ -64,7 +49,7 @@ public class EmaillistDao {
 		}
 		return result;
 	}
-//------------------------------------------------------------
+
 	public Boolean deleteByEmail(String email) {
 		boolean result = false;
 		Connection conn = null;  
@@ -72,24 +57,13 @@ public class EmaillistDao {
 		ResultSet rs = null;
 
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-
+			conn = getConnection();
+			
 			stmt = conn.createStatement();
 
-			String sql = "delete from emaillist where email= " + email;
+			String sql = "delete from emaillist where email= '" + email + "'";
 			rs = stmt.executeQuery(sql);
 
-			while (rs.next()) {
-				EmaillistVo vo = new EmaillistVo();
-				vo.setEmail(rs.getString(1));
-
-				//EmaillistVo.
-			}
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패: " + e);
 		} catch (SQLException e) {
 			System.out.println("Error: " + e);
 		} finally {
@@ -106,7 +80,7 @@ public class EmaillistDao {
 		}
 		return result;
 	}
-//------------------------------------------------------------
+
 	public List<EmaillistVo> findAll() {
 		List<EmaillistVo> result = new ArrayList<>();
 
@@ -115,11 +89,8 @@ public class EmaillistDao {
 		ResultSet rs = null;
 
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-
+			conn = getConnection();
+					
 			stmt = conn.createStatement();
 
 			String sql = 
@@ -140,8 +111,6 @@ public class EmaillistDao {
 				result.add(vo);
 			}
 
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패: " + e);
 		} catch (SQLException e) {
 			System.out.println("Error: " + e);
 		} finally {
@@ -159,5 +128,23 @@ public class EmaillistDao {
 			}
 		}
 		return result;
+	}
+	
+	
+	private Connection getConnection() throws SQLException {
+		Connection conn = null;
+
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
+			conn = DriverManager.getConnection(url, "webdb", "webdb");
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패: " + e);
+		}
+
+		return conn;
+
 	}
 }
