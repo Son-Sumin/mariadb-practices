@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SelectTest5 {
+public class SelectTest51 {
 
 	public static void main(String[] args) {
 		search("pat");
