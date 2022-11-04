@@ -24,7 +24,5 @@ public class AuthorDaoTest {
 		vo.setName(name);
 		dao.insert(vo);
 		
-		
 	}
-
 }

@@ -27,5 +27,4 @@ public class BookDaoTest {
 		
 		new BookDao().insert(vo);
 	}
-
 }

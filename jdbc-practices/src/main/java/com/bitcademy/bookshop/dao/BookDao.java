@@ -104,9 +104,46 @@ public class BookDao {
 		}
 		return result;
 	}
+		
+	public boolean updateStatus(long no, String status) {
+		boolean result = false;
+		Connection conn = null;  
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+			
+			String sql = "update book set status = ? where no = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, status);
+			pstmt.setLong(2, no);
+			
+			int count = pstmt.executeUpdate();
+		
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	
 	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
+		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 
