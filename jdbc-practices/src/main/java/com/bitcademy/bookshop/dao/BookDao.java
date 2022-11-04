@@ -35,8 +35,6 @@ public class BookDao {
 			//6. 결과처리
 			result = count == 1;
 			
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
 			System.out.println("Error:" + e);
 		} finally { 
