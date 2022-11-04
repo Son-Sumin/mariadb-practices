@@ -30,7 +30,7 @@ public class InsertTest22 {
 			
 			//3. Statement 준비
 			String sql = 
-					" insert" +
+					"insert" +
 					" into dept" +
 					" values (null, ?)";
 			pstmt = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class InsertTest22 {
 			pstmt.setString(1, name);
 			
 			//5. SQL 실행
-			int count = pstmt.executeUpdate(sql);
+			int count = pstmt.executeUpdate();
 			
 			//6. 결과처리
 			result = count == 1;
