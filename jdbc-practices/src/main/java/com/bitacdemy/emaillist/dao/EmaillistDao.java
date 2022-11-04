@@ -69,6 +69,7 @@ public class EmaillistDao {
 		boolean result = false;
 		Connection conn = null;  
 		Statement stmt = null;
+		ResultSet rs = null;
 
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -78,12 +79,15 @@ public class EmaillistDao {
 
 			stmt = conn.createStatement();
 
-			String sql = 
-					"delete from emaillist" +
-					" where email= " + email;
-			int count = stmt.executeUpdate(sql);
-			return result = count == 1;
+			String sql = "delete from emaillist where email= " + email;
+			rs = stmt.executeQuery(sql);
 
+			while (rs.next()) {
+				EmaillistVo vo = new EmaillistVo();
+				vo.setEmail(rs.getString(1));
+
+				//EmaillistVo.
+			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패: " + e);
 		} catch (SQLException e) {
