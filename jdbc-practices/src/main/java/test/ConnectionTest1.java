@@ -2,9 +2,11 @@
  * Maven Project로 jdbc-practices 만들기
  * JDBC; 자바 프로그램 내에서 SQL문을 실행하기 위한 자바API(Java Library Interface)
  * insert, delete, update, select는 여러 드라이버 설치 시 이용
+ * execute -> insert, delete, update, select
  * executeUpdate -> insert, delete, update
  * executeQuery -> select
  *    -> ResultSet rs = stmt.executeQuery(SQL); while(rs.next()); sysout ~
+ * MySQL 접근이 가능한지, 꼭 워크벤치 켜놓기
  * 
  * pom; <properties></properties> <dependencies><dependency></dependency></dependencies> <build></build> 수정
  * <dependency></dependency>은 MariaDB Java Client googling -> 원하는 버전 copy&paste
