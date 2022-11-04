@@ -1,10 +1,14 @@
 package test;
 
+// PreparedStatement 사용
+// 객체와 sql binding한다 표현
+// 값과 sql mapping한다 표현
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class SelectTest55 {
 
@@ -14,7 +18,7 @@ public class SelectTest55 {
 
 	private static void search(String keyword) {
 		Connection conn = null;  
-		Statement stmt = null;  // database 자원 정리 필수, close는 역순으로 기입
+		PreparedStatement pstmt = null;  // database 자원 정리 필수, close는 역순으로 기입
 		ResultSet rs = null;
 
 		try {
@@ -25,17 +29,20 @@ public class SelectTest55 {
 			String url = "jdbc:mysql://127.0.0.1:3306/employees?charset=utf8";
 			conn = DriverManager.getConnection(url, "hr", "hr");
 
-			// 3. Statement 생성
-			stmt = conn.createStatement();
-
-			// 4. SQL 실행
+			// 3. Statement 준비
 			String sql = 
 					"select emp_no, first_name" + 
 					" from employees" + 
-					" where first_name like '%" + keyword + "%'";
+					" where first_name like ?";  // '?' 아니니까 주의!!!
+			pstmt = conn.prepareStatement(sql);
 			
-			rs = stmt.executeQuery(sql);
+			// 4. Binding
+			pstmt.setString(1, '%' + keyword + '%');  // like query 때문에 % 이용
+
+			// 5. SQL 실행
+			rs = pstmt.executeQuery();  //(sql) 아님 주의!!
 			
+			// 6. 결과(ResultSet; 결과를 담고있는 객체) 처리
 			while (rs.next()) {
 				Long empNo = rs.getLong(1); // database는 1부터 시작, 1대신 "emp_no" 기입 가능
 				String firstName = rs.getString(2);
@@ -52,8 +59,8 @@ public class SelectTest55 {
 				if (rs != null) {
 					rs.close();
 				}
-				if (stmt != null) {
-					stmt.close();
+				if (pstmt != null) {
+					pstmt.close();
 				}
 				if (conn != null)
 					conn.close();
