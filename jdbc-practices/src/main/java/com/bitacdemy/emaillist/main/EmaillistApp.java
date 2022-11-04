@@ -52,7 +52,7 @@ public class EmaillistApp {
 		System.out.println(firstName + ":" + lastName + ":" + email);
 		
 		EmaillistVo vo = new EmaillistVo();
-		new EmaillistDao().insert(vo.getFirstName(), vo.getLastName(), vo.getEmail());
+		new EmaillistDao().insert(vo);
 		doList();
 	}
 
