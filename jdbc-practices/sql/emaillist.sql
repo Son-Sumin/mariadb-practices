@@ -8,8 +8,10 @@ select name, owner, species, gender, date_format(birth, '%Y-%m-%d'), death from 
 -- emaillist sql 연습
 
 -- insert
-insert into emaillist values(null, '안', '대혁', 'kickscar@gmail.com');
 insert into emaillist values(null, '둘', '리', 'dooly@gmail.com');
+insert into emaillist values(null, '마', '이콜', 'michol@gmail.com');
+insert into emaillist values(null, '짱', '구', 'zzanggu@gmail.com');
+
 
 -- select
 select * from emaillist order by no desc;
