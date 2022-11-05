@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.bitacdemy.emaillist.vo.EmaillistVo;
@@ -16,8 +15,8 @@ import com.bitacdemy.emaillist.vo.EmaillistVo;
 public class EmaillistDao {
 
 	public Boolean insert(EmaillistVo vo) {
-	
 		boolean result = false;
+		
 		Connection conn = null;
 		Statement stmt = null;
 		
@@ -29,8 +28,8 @@ public class EmaillistDao {
 			String sql = 
 				" insert into emaillist" +
 				" values(null, '"+ vo.getFirstName() + "', '" + vo.getLastName() + "', '" + vo.getEmail() + "')";
-			
 			int count = stmt.executeUpdate(sql);
+			
 			result = count == 1;
 			
 		} catch (SQLException e) {
@@ -52,18 +51,20 @@ public class EmaillistDao {
 
 	public Boolean deleteByEmail(String email) {
 		boolean result = false;
+		
 		Connection conn = null;  
 		Statement stmt = null;
-		ResultSet rs = null;
-
+		
 		try {
 			conn = getConnection();
 			
 			stmt = conn.createStatement();
 
 			String sql = "delete from emaillist where email= '" + email + "'";
-			rs = stmt.executeQuery(sql);
+			int count = stmt.executeUpdate(sql);
 
+			result = count == 1;
+			
 		} catch (SQLException e) {
 			System.out.println("Error: " + e);
 		} finally {

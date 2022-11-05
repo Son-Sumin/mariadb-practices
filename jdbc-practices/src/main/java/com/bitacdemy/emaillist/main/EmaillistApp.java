@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import com.bitacdemy.emaillist.dao.EmaillistDao;
 import com.bitacdemy.emaillist.vo.EmaillistVo;
-import com.bitcademy.bookshop.vo.BookVo;
 
 public class EmaillistApp {
 
