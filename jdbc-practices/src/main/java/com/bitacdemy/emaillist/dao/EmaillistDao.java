@@ -28,7 +28,7 @@ public class EmaillistDao {
 			
 			String sql = 
 				" insert into emaillist" +
-				" values(null, '"+ vo.getFirstName() + "', " + vo.getLastName() + "," + vo.getEmail() + "')";
+				" values(null, '"+ vo.getFirstName() + "', '" + vo.getLastName() + "', '" + vo.getEmail() + "')";
 			
 			int count = stmt.executeUpdate(sql);
 			result = count == 1;
