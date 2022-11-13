@@ -71,8 +71,8 @@ order by group_no desc, order_no asc;
  
 insert into board values(null, '베스킨', '사빠딸', '1', now(), '1', '1', '0', '1');
 insert into board values(null, '빠바', '소시지빵', '1', now(), '2', '1', '0', '1');
-insert into board values(null, '붕어빵', '맛있겠다', '1', now(), (select max(group_no)) + 1, '1', '0', '1');
+insert into board values(null, '붕어빵', '맛있겠다', '1', now(), (select max(group_no) + 1), '1', '0', '1');
 insert into board values(null, '방앗간', '인절미', '1', now(), 'max(group_no) as maxGroupNo+1', '1', '0', '2');
  
- delete from board where title = '빠바';
+ delete from board where no = 7;
 select max(group_no) from board;
