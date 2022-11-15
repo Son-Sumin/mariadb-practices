@@ -73,10 +73,15 @@ order by group_no desc, order_no asc;
  
  -- pstmt.setInt(1, (page-1)*3)
  
-insert into board values(null, '베스킨', '사빠딸', '1', now(), '1', '1', '0', '1');
-insert into board values(null, '빠바', '소시지빵', '1', now(), '2', '1', '0', '2');
-insert into board values(null, '타코야끼', '야미', '1', now(), (select max(group_no)) + 1, '1', '0', '3');
-insert into board values(null, '방앗간', '인절미', '1', now(), (select max(group_no)) + 1, '1', '0', '4');
+insert into board values(null, '베스킨', '사빠딸', '1', now(), '1', '1', '1', '6');
+ insert into board values(null, '빠바', '소시지빵', '1', now(), 'maxGroupNo+1', '1', '0', '6');
+ insert into board values(null, '방앗간', '인절미', '1', now(), 'max(group_no) as maxGroupNo+1', '1', '0', '7');
+  insert into board values(null, '도미노피자', '슈프림피자', '1', now(), '1', '1', '1', '4');
  
- delete from board where no = 7;
-select max(group_no) from board;
+ delete from board where title = '빠바';
+select max(group_no) as maxGroupNo from board;
+
+
+select title, contents
+  from board
+ where no = 3;
