@@ -85,3 +85,12 @@ select max(group_no) as maxGroupNo from board;
 select title, contents
   from board
  where no = 3;
+ 
+ 
+ -- primary key를 null이 아닌 직접 insert로 사용하고 싶을 때
+  select last_insert_id();
+ insert
+   into guestbook
+ values(null, '둘리', '1234', '호호이이~', now());
+ 
+ select last_insert_id();
