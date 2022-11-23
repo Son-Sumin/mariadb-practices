@@ -51,6 +51,14 @@ values(null, '맹구', 'menggu@gmail.com', '1234', 'male', now());
  insert 
   into user 
 values(null, '짱구', 'zzanggu@gmail.com', '1234', 'male', now());
+
+insert 
+  into user 
+values(null, '뽀로로', 'pororo@gmail.com', '1234', 'male', now(), 'user');
+
+insert 
+  into user 
+values(null, '크롱', 'crong@gmail.com', '1234', 'male', now(), 'user');
  
  -- select
  select * from user;
