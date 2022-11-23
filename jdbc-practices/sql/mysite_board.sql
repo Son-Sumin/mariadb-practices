@@ -81,7 +81,7 @@ insert into board values(null, '도미노피자', '슈프림피자', '1', now(),
 delete from board where title = '빠바';
 select max(group_no) as maxGroupNo from board;
 
-select title, contents
+select no, title, contents, hit, user_no
   from board
  where no = 3;
  
