@@ -99,4 +99,8 @@ select no, title, contents, hit, user_no
    into guestbook
  values(null, '둘리', '1234', '호호이이~', now());
  
- select last_insert_id();
+select last_insert_id();
+ 
+update board
+   set hit = hit +1
+ where no = 3;
