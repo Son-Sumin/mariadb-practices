@@ -85,10 +85,10 @@ insert into board values(null, '베스킨', '사빠딸', '1', now(), '1', '1', '
 insert into board values(null, '빠바', '소시지빵', '1', now(), 'maxGroupNo+1', '1', '0', '6');
 insert into board values(null, '방앗간', '인절미', '1', now(), 'max(group_no) as maxGroupNo+1', '1', '0', '7');
 insert into board values(null, '도미노피자', '슈프림피자', '1', now(), '1', '1', '1', '4');
-insert into board values(null, '아이스', '아메리카노', '0', now(), (max(group_no))+1, '1', '1', '6');
+insert into board values(null, '아', '샷츄', '0', now(), (select ifnull(max(group_no), 1))+1, '1', '0', '6');
  
 delete from board where title = '빠바';
-select ifnull(max(group_no)+1, 1) as maxGroupNo from board;
+select ifnull(max(group_no), 1) from board;
 
 select no, title, contents, hit, user_no
   from board
