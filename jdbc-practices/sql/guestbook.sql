@@ -29,6 +29,9 @@ select * from guestbook;
 
 insert into guestbook values(null, '둘리', '1234', '호이~', now());
 insert into guestbook values(null, '마이콜', '1234', '라면 구공탄~', now());
+insert
+  into guestbook
+values(null, '둘리', '1234', '호호이이~', now());
 
 select no, name, contents, password, date_format(reg_date, '%Y/%m/%d %H:%i:%s') 
 from guestbook order by reg_date desc;
